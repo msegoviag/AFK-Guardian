@@ -1,8 +1,9 @@
-import pyautogui
-import time
 import cv2
+import time
+import pyautogui
 import numpy as np
 from PIL import Image
+import lockscreen as Lock
 
 IDLE_TIMEOUT = 5
 
@@ -28,21 +29,22 @@ def compare_screenshots(screenshot1, screenshot2):
     # Compara la imagen resultante y devuelve True si las imágenes son iguales, False en caso contrario
     return result.sum() == 0
 
-
 # Toma una captura de pantalla inicial
 screenshot1 = pyautogui.screenshot()
 
 while True:
+    time.sleep(IDLE_TIMEOUT)
     # Toma segunda captura de pantalla
     screenshot2 = pyautogui.screenshot()
 
     # Compara las dos capturas de pantalla
     if compare_screenshots(screenshot1, screenshot2):
         print("Las capturas de pantalla son iguales")
+        Lock.LockScreen.lockscreen_windows()
     else:
         print("Las capturas de pantalla son diferentes")
 
     # Actualiza la captura de pantalla inicial
     screenshot1 = screenshot2
 
-    time.sleep(IDLE_TIMEOUT)
+    
