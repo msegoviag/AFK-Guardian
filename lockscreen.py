@@ -1,6 +1,6 @@
-from ctypes import CDLL
+import os
 import ctypes
-
+from ctypes import CDLL
 
 class LockScreen:
 
@@ -20,7 +20,7 @@ class LockScreen:
         powrprof.SetSuspendState(0, 1, 0)
 
     @staticmethod
-    def closession_windows():
+    def off_windows():
 
         EWX_LOGOFF = 0x00000000
         EWX_FORCE = 0x00000004
@@ -31,6 +31,7 @@ class LockScreen:
         # Llamada a correspondiente que efectua la operación
         ctypes.windll.user32.ExitWindowsEx(EWX_LOGOFF | EWX_FORCE, 0)
 
+    # Works on Ubuntu: testing in 22.04
     @staticmethod
     def lockscreen_linux():
-        pass
+        os.system('xdg-screensaver activate && xdg-screensaver lock')

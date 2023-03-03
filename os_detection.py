@@ -10,4 +10,3 @@ class SistemaOperativo:
         print(f"Versión: {self.version}")
 
 sistema = SistemaOperativo()
-
